@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GreengetsTeste</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <style type="text/css">
+  	body{
+  		background-color: #fff;
+  	}
+	#full_content {
+		
+		background-size: cover;
+	}
+
+	#topo{
+		background-color: #629C44;
+		border-radius: 10px;
+		height: 100px;
+		width: 100%;
+	}
+	#topo1{
+		float: left;
+		width: 80%;
+	}
+
+	#topo1 img{
+		background-size: contain;
+		height: 50px;
+		margin-top: 25px;
+		margin-left: 10px;
+		width: 30%;
+	}
+
+	#topo1 input{
+		border-radius: 10px;
+		margin-top: 40px;
+		margin-right: 50px;
+		float: right;
+		width: 60%;
+	}
+	#topo2{
+		float: right;
+		width: 20%;
+	}
+	#content{
+		background-color: #fff;
+	}
+	#produto{
+		float: left;
+		height: 350px;
+		margin: 10px;
+		padding: 10px;
+		width: 30%;
+	}
+	#produto li{
+		list-style: none;
+	}
+	#produto p{
+		float: left;
+	}
+	#produto a{
+		color: #000;
+	}
+  </style>
+</head>
+<body>
+	<div id="full_content">
+		<div id="topo">
+			<div id="topo1">
+				<img src="../logo2.jpg" />
+
+			</div>
+			<div id="topo2">
+				<% if current_order %>
+					<p style="padding:10px;">
+					  Você tem <%= pluralize current_order.total_items, 'item'%> em seu  carrinho,
+					  que custam
+					  <%= number_to_currency current_order.total_before_tax %>.
+					</p>
+				<% end %>
+			</div>
+		</div>
+		
+		<div id="content">
+			<%= yield %>
+
+			<%= link_to "Ver carrinho", basket_path %>
+			<%= flash[:notice] %>
+		</div>
+
+<%= link_to "Checkout", checkout_path %>
+
+</body>
+</html>
